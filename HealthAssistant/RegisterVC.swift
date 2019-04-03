@@ -77,7 +77,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
                 if UIScreen.main.nativeBounds.height == 1136 {
                     self.view.frame.origin.y -= UIScreen.main.bounds.height * 0.1 + 60
                 } else {
-                    self.view.frame.origin.y -= UIScreen.main.bounds.height * 0.1
+                    self.view.frame.origin.y -= UIScreen.main.bounds.height * 0.15
                 }
             }
         }
@@ -88,5 +88,4 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
             self.view.frame.origin.y = 0
         }
     }
-
 }
