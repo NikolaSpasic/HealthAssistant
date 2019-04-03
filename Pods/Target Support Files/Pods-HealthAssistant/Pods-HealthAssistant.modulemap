@@ -1,0 +1,6 @@
+module Pods_HealthAssistant {
+  umbrella header "Pods-HealthAssistant-umbrella.h"
+
+  export *
+  module * { export * }
+}

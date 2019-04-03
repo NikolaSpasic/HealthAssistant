@@ -22,12 +22,12 @@ class LogInRegisterVC: UIViewController {
     
     @IBAction func segmentedCtrlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.33, animations: {
                 self.logInView.alpha = 1
                 self.registerView.alpha = 0
             })
         } else {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.33, animations: {
                 self.logInView.alpha = 0
                 self.registerView.alpha = 1
             })
