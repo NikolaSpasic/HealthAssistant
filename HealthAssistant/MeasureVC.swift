@@ -16,7 +16,11 @@ class MeasureVC: UIViewController {
     
     let motion = CMMotionManager()
     var timer: Timer!
-
+    var gatheredSensorData = [SensorData]()
+    var secondsToCount = 60
+    var timerToSendData = Timer()
+    var isTimerRunning = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -39,24 +43,22 @@ class MeasureVC: UIViewController {
                 self.timer = Timer(fire: Date(), interval: 0.1,
                                    repeats: true, block: { (timer) in
                                     // Get the gyro data.
-                                    if let data = self.motion.gyroData {
-                                        let x = (data.rotationRate.x * 1000).rounded() / 1000
-                                        let y = (data.rotationRate.y * 1000).rounded() / 1000
-                                        let z = (data.rotationRate.z * 1000).rounded() / 1000
-                                        
-                                        
-                                        
-                                        self.gyroLbl.text = "Gyro data: \n \(x) \n \(y) \n \(z)"
-                                        
-                                        // Use the gyroscope data in your app.
-                                    }
-                                    if let data = self.motion.accelerometerData {
-                                        let x = ((data.acceleration.x * -9.81) * 1000).rounded() / 1000
-                                        let y = ((data.acceleration.y * -9.81) * 1000).rounded() / 1000
-                                        let z = ((data.acceleration.z * -9.81) * 1000).rounded() / 1000
-                                        
-                                        self.accelerLbl.text = "Acc data: \n \(x) \n \(y) \n \(z)"
-                                        // Use the accelerometer data in your app.
+                                    if let gyroData = self.motion.gyroData {
+                                        if let accData = self.motion.accelerometerData {
+                                            let gyrox = (gyroData.rotationRate.x * 1000).rounded() / 1000
+                                            let gyroy = (gyroData.rotationRate.y * 1000).rounded() / 1000
+                                            let gyroz = (gyroData.rotationRate.z * 1000).rounded() / 1000
+                                            
+                                            let accx = ((accData.acceleration.x * -9.81) * 1000).rounded() / 1000
+                                            let accy = ((accData.acceleration.y * -9.81) * 1000).rounded() / 1000
+                                            let accz = ((accData.acceleration.z * -9.81) * 1000).rounded() / 1000
+                                            
+                                            self.accelerLbl.text = "Acc data: \n \(accx) \n \(accy) \n \(accz)"
+                                            
+                                            self.gyroLbl.text = "Gyro data: \n \(gyrox) \n \(gyroy) \n \(gyroz)"
+                                            let singleReading = SensorData(accx: accx, accy: accy, accz: accz, gyx: gyrox, gyy: gyroy, gyz: gyroz)
+                                            self.gatheredSensorData.append(singleReading)
+                                        }
                                     }
                 })
                 
@@ -71,6 +73,7 @@ class MeasureVC: UIViewController {
             self.timer = nil
             
             self.motion.stopGyroUpdates()
+            self.motion.stopAccelerometerUpdates()
         }
     }
 }

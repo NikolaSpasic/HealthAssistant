@@ -68,5 +68,20 @@ class API {
                 }
         }
     }
+    
+    func sendSensorData() {
+        let params = ["data": "try"]
+        AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    let status = json["status"]
+                    print(status)
+                case .failure(let err):
+                    print(err)
+                }
+        }
+    }
 }
 

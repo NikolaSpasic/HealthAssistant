@@ -1,1 +1,1 @@
-/Users/vtsappsteam/repos/HealthAssistant/Pods/Target Support Files/Alamofire/Alamofire-umbrella.h
+../../../Target Support Files/Alamofire/Alamofire-umbrella.h

@@ -1,1 +1,1 @@
-/Users/vtsappsteam/repos/HealthAssistant/Pods/Target Support Files/SwiftyJSON/SwiftyJSON-umbrella.h
+../../../Target Support Files/SwiftyJSON/SwiftyJSON-umbrella.h
