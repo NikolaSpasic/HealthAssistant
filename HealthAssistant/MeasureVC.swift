@@ -13,23 +13,41 @@ class MeasureVC: UIViewController {
     
     @IBOutlet weak var gyroLbl: UILabel!
     @IBOutlet weak var accelerLbl: UILabel!
+    @IBOutlet weak var timerLbl: UILabel!
     
     let motion = CMMotionManager()
     var timer: Timer!
     var gatheredSensorData = [SensorData]()
-    var secondsToCount = 60
-    var timerToSendData = Timer()
+    var timeLeft = 15
+    var dataTimer: Timer?
     var isTimerRunning = false
+    var collectingData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func startGyroPressed(_ sender: Any) {
-        startGyros()
+        if collectingData == false {
+            startGyros()
+            dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
+            collectingData = true
+        }
     }
     @IBAction func stopGyroPressed(_ sender: Any) {
         stopGyros()
+        collectingData = false
+    }
+    
+    @objc func updateDataTimer() {
+        timeLeft -= 1
+        timerLbl.text = "\(timeLeft) seconds until data is sent"
+        if timeLeft <= 0 {
+            if !gatheredSensorData.isEmpty {
+                API.instance.sendSensorData()
+            }
+            timeLeft = 15
+        }
     }
     
     func startGyros() {
@@ -75,5 +93,12 @@ class MeasureVC: UIViewController {
             self.motion.stopGyroUpdates()
             self.motion.stopAccelerometerUpdates()
         }
+        if !gatheredSensorData.isEmpty {
+            API.instance.sendSensorData()
+            gatheredSensorData.removeAll()
+        }
+        dataTimer?.invalidate()
+        dataTimer = nil
+        timeLeft = 15
     }
 }

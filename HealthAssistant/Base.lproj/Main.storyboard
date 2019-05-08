@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -309,7 +309,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2OH-V3-FjL">
-                                <rect key="frame" x="37.666666666666657" y="164.33333333333334" width="300" height="20.333333333333343"/>
+                                <rect key="frame" x="37.666666666666657" y="164.33333333333334" width="300" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -327,17 +327,27 @@
                                     <action selector="startGyroPressed:" destination="bEx-9m-CT4" eventType="touchUpInside" id="oF6-aD-hQZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNR-n9-NGM">
+                                <rect key="frame" x="37.666666666666657" y="235.33333333333334" width="300" height="21.000000000000028"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IFS-ws-Ei1" firstAttribute="top" secondItem="RMl-dx-KAI" secondAttribute="top" id="1bi-OZ-VNe"/>
                             <constraint firstItem="2OH-V3-FjL" firstAttribute="top" secondItem="GBr-12-xyq" secondAttribute="bottom" constant="50" id="2gM-YP-PbW"/>
                             <constraint firstItem="GBr-12-xyq" firstAttribute="centerX" secondItem="iiu-N2-0HT" secondAttribute="centerX" id="CAn-EC-cFr"/>
+                            <constraint firstItem="YNR-n9-NGM" firstAttribute="height" secondItem="2OH-V3-FjL" secondAttribute="height" id="IJV-fL-R5O"/>
+                            <constraint firstItem="YNR-n9-NGM" firstAttribute="top" secondItem="2OH-V3-FjL" secondAttribute="bottom" constant="50" id="OLK-QP-ToX"/>
                             <constraint firstItem="GBr-12-xyq" firstAttribute="top" secondItem="Tpv-VL-MqX" secondAttribute="top" constant="50" id="Smd-nC-tg2"/>
                             <constraint firstItem="RMl-dx-KAI" firstAttribute="leading" secondItem="Tpv-VL-MqX" secondAttribute="leading" constant="15" id="Ssp-mt-gSi"/>
+                            <constraint firstItem="YNR-n9-NGM" firstAttribute="centerX" secondItem="iiu-N2-0HT" secondAttribute="centerX" id="Ulg-dh-Ygv"/>
                             <constraint firstItem="2OH-V3-FjL" firstAttribute="width" secondItem="GBr-12-xyq" secondAttribute="width" id="ZHn-pr-LSG"/>
                             <constraint firstItem="2OH-V3-FjL" firstAttribute="centerX" secondItem="iiu-N2-0HT" secondAttribute="centerX" id="cX1-Cn-vcE"/>
                             <constraint firstItem="IFS-ws-Ei1" firstAttribute="width" secondItem="RMl-dx-KAI" secondAttribute="width" id="gjd-aR-613"/>
+                            <constraint firstItem="YNR-n9-NGM" firstAttribute="width" secondItem="2OH-V3-FjL" secondAttribute="width" id="lLz-99-3EJ"/>
                             <constraint firstItem="GBr-12-xyq" firstAttribute="width" secondItem="iiu-N2-0HT" secondAttribute="width" multiplier="0.8" id="riC-rH-Y7e"/>
                             <constraint firstItem="Tpv-VL-MqX" firstAttribute="bottom" secondItem="RMl-dx-KAI" secondAttribute="bottom" constant="30" id="uTz-tX-UuK"/>
                             <constraint firstItem="Tpv-VL-MqX" firstAttribute="trailing" secondItem="IFS-ws-Ei1" secondAttribute="trailing" constant="15" id="wbB-Iu-W5C"/>
@@ -349,6 +359,7 @@
                     <connections>
                         <outlet property="accelerLbl" destination="2OH-V3-FjL" id="sD2-Xa-VPe"/>
                         <outlet property="gyroLbl" destination="GBr-12-xyq" id="DcS-ib-xJ4"/>
+                        <outlet property="timerLbl" destination="YNR-n9-NGM" id="ksW-BM-MU6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yp-re-npH" userLabel="First Responder" sceneMemberID="firstResponder"/>
