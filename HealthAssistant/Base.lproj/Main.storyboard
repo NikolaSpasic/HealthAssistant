@@ -219,7 +219,7 @@
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="0.24561403509999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrujte se. Napravite nalog i prijavite se." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyJ-L7-rIA">
                                 <rect key="frame" x="28" y="74" width="319" height="48"/>
@@ -281,7 +281,7 @@
             </objects>
             <point key="canvasLocation" x="1996" y="719"/>
         </scene>
-        <!--Item 2-->
+        <!--MeasureVC-->
         <scene sceneID="bfL-aj-9Lw">
             <objects>
                 <viewController id="bEx-9m-CT4" customClass="MeasureVC" customModule="HealthAssistant" customModuleProvider="target" sceneMemberID="viewController">
@@ -355,7 +355,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tpv-VL-MqX"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" image="ic_masuring_icon" id="L0O-Vy-NFs"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_masuring_icon" id="L0O-Vy-NFs"/>
                     <connections>
                         <outlet property="accelerLbl" destination="2OH-V3-FjL" id="sD2-Xa-VPe"/>
                         <outlet property="gyroLbl" destination="GBr-12-xyq" id="DcS-ib-xJ4"/>
@@ -366,7 +366,7 @@
             </objects>
             <point key="canvasLocation" x="3801" y="710"/>
         </scene>
-        <!--Item 1-->
+        <!--View Controller-->
         <scene sceneID="JRf-G8-2NN">
             <objects>
                 <viewController id="qA4-vR-cNw" sceneMemberID="viewController">
@@ -376,13 +376,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dny-uF-27m"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" image="ic_home_icon" id="MaT-jT-WvI"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_home_icon" id="MaT-jT-WvI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m8x-4I-mRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3801" y="-586"/>
         </scene>
-        <!--Item-->
+        <!--ProfileVC-->
         <scene sceneID="EVe-gv-VuH">
             <objects>
                 <viewController id="Bdl-F2-nju" customClass="ProfileVC" customModule="HealthAssistant" customModuleProvider="target" sceneMemberID="viewController">
@@ -438,7 +438,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Pv-RK-BEG"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="person_icon" id="A4c-vL-oYc"/>
+                    <tabBarItem key="tabBarItem" title="" image="person_icon" id="A4c-vL-oYc"/>
                     <connections>
                         <outlet property="logOutBttn" destination="Mzk-0h-66n" id="mwi-Un-zuC"/>
                         <outlet property="profilePhotoImageView" destination="9iD-WS-qh0" id="Wia-bx-l6W"/>
@@ -457,6 +457,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.2470588235" green="0.90980392160000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.2470588235" green="0.90980392160000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="qA4-vR-cNw" kind="relationship" relationship="viewControllers" id="jUF-39-tnE"/>
@@ -477,6 +479,6 @@
         <image name="splash" width="194" height="302"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GRV-RJ-bXx"/>
+        <segue reference="Y8F-82-YJa"/>
     </inferredMetricsTieBreakers>
 </document>

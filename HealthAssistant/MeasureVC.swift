@@ -29,8 +29,8 @@ class MeasureVC: UIViewController {
     
     @IBAction func startGyroPressed(_ sender: Any) {
         if collectingData == false {
-            startGyros()
             dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
+            startGyros()
             collectingData = true
         }
     }
@@ -44,7 +44,7 @@ class MeasureVC: UIViewController {
         timerLbl.text = "\(timeLeft) seconds until data is sent"
         if timeLeft <= 0 {
             if !gatheredSensorData.isEmpty {
-                API.instance.sendSensorData()
+                API.instance.sendSensorData(sensorData: gatheredSensorData)
             }
             timeLeft = 15
         }
@@ -82,7 +82,15 @@ class MeasureVC: UIViewController {
                 
                 // Add the timer to the current run loop.
                 RunLoop.current.add(self.timer!, forMode: .default)
+            } else {
+                Util.displayInformation(self, title: "Accelerometer is not working", message: "Can't measure data.")
+                stopGyros()
             }
+        } else {
+            Util.displayInformation(self, title: "Gyroscope is not working", message: "Can't measure data.")
+            dataTimer?.invalidate()
+            dataTimer = nil
+            timeLeft = 15
         }
     }
     func stopGyros() {
@@ -94,7 +102,7 @@ class MeasureVC: UIViewController {
             self.motion.stopAccelerometerUpdates()
         }
         if !gatheredSensorData.isEmpty {
-            API.instance.sendSensorData()
+            API.instance.sendSensorData(sensorData: gatheredSensorData)
             gatheredSensorData.removeAll()
         }
         dataTimer?.invalidate()

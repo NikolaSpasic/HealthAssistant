@@ -69,8 +69,8 @@ class API {
         }
     }
     
-    func sendSensorData() {
-        let params = ["data": "try"]
+    func sendSensorData(sensorData: [SensorData]) {
+        let params: [String: Any] = ["user_id": "\(API.instance.user?.name ?? "1")", "source": "ios", "data": sensorData]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
             .responseJSON { response in
                 switch response.result {
