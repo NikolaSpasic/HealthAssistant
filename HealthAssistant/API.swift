@@ -70,7 +70,20 @@ class API {
     }
     
     func sendSensorData(sensorData: [SensorData]) {
-        let params: [String: Any] = ["user_id": "\(API.instance.user?.name ?? "1")", "source": "ios", "data": sensorData]
+        var measurments = [[String:String]]()
+        for singleMeasurment in sensorData {
+            let measurmentObject = [
+                "gx": "\(singleMeasurment.gx!)",
+                "gy": "\(singleMeasurment.gy!)",
+                "gz": "\(singleMeasurment.gz!)",
+                "ax": "\(singleMeasurment.ax!)",
+                "ay": "\(singleMeasurment.ay!)",
+                "az": "\(singleMeasurment.az!)",
+                "timestamp": "\(singleMeasurment.timestamp)"
+            ]
+            measurments.append(measurmentObject)
+        }
+        let params: [String: Any] = ["user_id": "\(API.instance.user?.name ?? "1")", "source": "ios", "data": measurments]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
             .responseJSON { response in
                 switch response.result {
