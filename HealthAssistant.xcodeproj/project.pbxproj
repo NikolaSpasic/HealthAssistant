@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		726FE49122830B71006B648B /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726FE49022830B71006B648B /* SensorData.swift */; };
+		72FE365A228458EF005F7F86 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */; };
+		72FE365C22845ABD005F7F86 /* MeasurementOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE365B22845ABD005F7F86 /* MeasurementOption.swift */; };
 		9F458C39685127EC3ABAEAA1 /* libPods-HealthAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BF231F83D488305555B8D /* libPods-HealthAssistant.a */; };
 		F9169104224A3D1200EF1BD3 /* MeasureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9169103224A3D1200EF1BD3 /* MeasureVC.swift */; };
 		F925CF9D224A2213009E7138 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F925CF9C224A2213009E7138 /* AppDelegate.swift */; };
@@ -28,6 +30,8 @@
 /* Begin PBXFileReference section */
 		270BF231F83D488305555B8D /* libPods-HealthAssistant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HealthAssistant.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		726FE49022830B71006B648B /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
+		72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
+		72FE365B22845ABD005F7F86 /* MeasurementOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementOption.swift; sourceTree = "<group>"; };
 		B83DEFD5093111404C1FB8B0 /* Pods-HealthAssistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthAssistant.release.xcconfig"; path = "Target Support Files/Pods-HealthAssistant/Pods-HealthAssistant.release.xcconfig"; sourceTree = "<group>"; };
 		E2F24BDFD081F9CB8D7BBAD4 /* Pods-HealthAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthAssistant.debug.xcconfig"; path = "Target Support Files/Pods-HealthAssistant/Pods-HealthAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 		F9169103224A3D1200EF1BD3 /* MeasureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureVC.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 			children = (
 				726FE49022830B71006B648B /* SensorData.swift */,
 				F9D9D7992254DA210004E5E8 /* User.swift */,
+				72FE365B22845ABD005F7F86 /* MeasurementOption.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 				F925CFA8224A221E009E7138 /* Info.plist */,
 				F9D9D79B2254F0940004E5E8 /* Spinner.swift */,
 				F9D9D79D2254F6670004E5E8 /* Util.swift */,
+				72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */,
 			);
 			path = HealthAssistant;
 			sourceTree = "<group>";
@@ -231,6 +237,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72FE365A228458EF005F7F86 /* OptionsTableViewCell.swift in Sources */,
+				72FE365C22845ABD005F7F86 /* MeasurementOption.swift in Sources */,
 				F9D9D79E2254F6670004E5E8 /* Util.swift in Sources */,
 				F925CF9F224A2213009E7138 /* SplashVC.swift in Sources */,
 				F925CF9D224A2213009E7138 /* AppDelegate.swift in Sources */,

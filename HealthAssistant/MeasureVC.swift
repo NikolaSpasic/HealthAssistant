@@ -9,11 +9,13 @@
 import UIKit
 import CoreMotion
 
-class MeasureVC: UIViewController {
+class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var gyroLbl: UILabel!
     @IBOutlet weak var accelerLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
+    @IBOutlet weak var startMeasuringBttn: UIButton!
+    @IBOutlet weak var optionsTableView: UITableView!
     
     let motion = CMMotionManager()
     var timer: Timer!
@@ -22,21 +24,88 @@ class MeasureVC: UIViewController {
     var dataTimer: Timer?
     var isTimerRunning = false
     var collectingData = false
+    var measurementOptions = [MeasurmentOption]()
+    var brokenImg: UIImage!
+    var selectedMeasurmentOptions = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        brokenImg = UIColor.black.image()
+        optionsTableView.delegate = self
+        optionsTableView.dataSource = self
+        optionsTableView.rowHeight = 90
+        optionsTableView.tableFooterView = UIView()
+        measurementOptions.append(MeasurmentOption(logoimg: UIImage(named: "activity_icon") ?? brokenImg, illustrationImg: UIImage(named: "activity_lines") ?? brokenImg, activityName: "Aktivnost"))
+    }
+    
+    override func viewDidLayoutSubviews() {
+        startMeasuringBttn.layer.cornerRadius = startMeasuringBttn.frame.width / 2
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return measurementOptions.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsTableViewCell
+        cell.optionImageView.image = measurementOptions[indexPath.section].logo
+        cell.optionLbl.text = measurementOptions[indexPath.section].name
+        cell.optionIllustration.image = measurementOptions[indexPath.section].illustration
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0).cgColor
+        cell.layer.cornerRadius = 7
+        cell.optionChecked.image = cell.optionChecked.image?.withRenderingMode(.alwaysTemplate)
+        cell.optionChecked.tintColor = Util.HAGreen
+        if !selectedMeasurmentOptions.contains(measurementOptions[indexPath.row].name) {
+            cell.optionChecked.isHidden = true
+        } else {
+            cell.optionChecked.isHidden = false
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        optionsTableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? OptionsTableViewCell {
+            if !selectedMeasurmentOptions.contains(measurementOptions[indexPath.section].name) {
+                selectedMeasurmentOptions.append(measurementOptions[indexPath.section].name)
+                cell.optionChecked.isHidden = false
+            } else {
+                selectedMeasurmentOptions.removeAll { $0 == measurementOptions[indexPath.section].name }
+                cell.optionChecked.isHidden = true
+            }
+        }
     }
     
     @IBAction func startGyroPressed(_ sender: Any) {
-        if collectingData == false {
-            dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
-            startGyros()
-            collectingData = true
+        if selectedMeasurmentOptions.contains("Aktivnost") {
+            if collectingData == false {
+                dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
+                startGyros()
+                collectingData = true
+            }
+        } else {
+            Util.displayInformation(self, title: "Niste izabrali opcije za merenje", message: "Izaberite opcije i pokusajte ponovo.")
         }
     }
     @IBAction func stopGyroPressed(_ sender: Any) {
         stopGyros()
-        collectingData = false
     }
     
     @objc func updateDataTimer() {
@@ -91,6 +160,7 @@ class MeasureVC: UIViewController {
             dataTimer?.invalidate()
             dataTimer = nil
             timeLeft = 15
+            collectingData = false
         }
     }
     func stopGyros() {
@@ -108,5 +178,6 @@ class MeasureVC: UIViewController {
         dataTimer?.invalidate()
         dataTimer = nil
         timeLeft = 15
+        collectingData = false
     }
 }
