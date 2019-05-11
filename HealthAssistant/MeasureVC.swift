@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreMotion
+import Reachability
 
 class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -113,7 +114,14 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         timerLbl.text = "\(timeLeft) seconds until data is sent"
         if timeLeft <= 0 {
             if !gatheredSensorData.isEmpty {
-                API.instance.sendSensorData(sensorData: gatheredSensorData)
+                let isConnectedToWifi = check()
+                if isConnectedToWifi {
+                    API.instance.sendSensorData(sensorData: gatheredSensorData)
+                } else {
+                    Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
+                        API.instance.sendSensorData(sensorData: self.gatheredSensorData)
+                    }
+                }
             }
             timeLeft = 15
         }
@@ -172,12 +180,31 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.motion.stopAccelerometerUpdates()
         }
         if !gatheredSensorData.isEmpty {
-            API.instance.sendSensorData(sensorData: gatheredSensorData)
-            gatheredSensorData.removeAll()
+            let isConnectedToWifi = check()
+            if isConnectedToWifi {
+                API.instance.sendSensorData(sensorData: gatheredSensorData)
+                gatheredSensorData.removeAll()
+            } else {
+                Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
+                    API.instance.sendSensorData(sensorData: self.gatheredSensorData)
+                    self.gatheredSensorData.removeAll()
+                }
+            }
         }
         dataTimer?.invalidate()
         dataTimer = nil
         timeLeft = 15
         collectingData = false
+    }
+    
+    func check() -> Bool {
+        let reachability = Reachability()!
+        var connected: Bool = false
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                connected = true
+            }
+        }
+        return connected
     }
 }
