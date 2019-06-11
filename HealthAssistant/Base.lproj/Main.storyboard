@@ -357,7 +357,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopGyroPressed:" destination="bEx-9m-CT4" eventType="touchUpInside" id="uL3-6l-CBs"/>
+                                    <action selector="stopGyroPressed:" destination="bEx-9m-CT4" eventType="touchUpInside" id="pl3-ae-Oh3"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ajx-LF-tZE">
@@ -452,6 +452,7 @@
                     <tabBarItem key="tabBarItem" title="" image="ic_masuring_icon" id="L0O-Vy-NFs"/>
                     <connections>
                         <outlet property="accelerLbl" destination="2OH-V3-FjL" id="sD2-Xa-VPe"/>
+                        <outlet property="backgroundColorView" destination="WKt-tp-jYQ" id="O3f-KM-s0v"/>
                         <outlet property="gyroLbl" destination="GBr-12-xyq" id="DcS-ib-xJ4"/>
                         <outlet property="optionsTableView" destination="g2m-Gk-QZD" id="s09-Ud-CZ1"/>
                         <outlet property="startMeasuringBttn" destination="RMl-dx-KAI" id="vYw-UK-lhJ"/>

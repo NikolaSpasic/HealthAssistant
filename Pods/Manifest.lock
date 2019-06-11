@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (5.0.0-beta.3)
+  - Alamofire (5.0.0-beta.6)
   - ReachabilitySwift (4.3.1)
-  - SwiftyJSON (4.2.0)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.3)
@@ -15,9 +15,9 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 50d6fa7e8cbe7f84559e86ab641ffd029db655f8
+  Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
 PODFILE CHECKSUM: 730652889d5d19339d87809d9754e94e272ddbf9
 

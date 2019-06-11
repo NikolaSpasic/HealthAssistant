@@ -54,8 +54,6 @@ open class Session {
                 redirectHandler: RedirectHandler? = nil,
                 cachedResponseHandler: CachedResponseHandler? = nil,
                 eventMonitors: [EventMonitor] = []) {
-        precondition(session.delegate === delegate,
-                     "SessionManager(session:) initializer must be passed the delegate that has been assigned to the URLSession as the SessionDataProvider.")
         precondition(session.delegateQueue.underlyingQueue === rootQueue,
                      "SessionManager(session:) intializer must be passed the DispatchQueue used as the delegateQueue's underlyingQueue as rootQueue.")
 
@@ -74,7 +72,7 @@ open class Session {
         delegate.stateProvider = self
     }
 
-    public convenience init(configuration: URLSessionConfiguration = .alamofireDefault,
+    public convenience init(configuration: URLSessionConfiguration = URLSessionConfiguration.af.default,
                             delegate: SessionDelegate = SessionDelegate(),
                             rootQueue: DispatchQueue = DispatchQueue(label: "org.alamofire.sessionManager.rootQueue"),
                             startRequestsImmediately: Bool = true,
@@ -318,7 +316,7 @@ open class Session {
     }
 
     open func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
-                     usingThreshold encodingMemoryThreshold: UInt64 = MultipartUpload.encodingMemoryThreshold,
+                     usingThreshold encodingMemoryThreshold: UInt64 = MultipartFormData.encodingMemoryThreshold,
                      fileManager: FileManager = .default,
                      to url: URLConvertible,
                      method: HTTPMethod = .post,
@@ -326,22 +324,23 @@ open class Session {
                      interceptor: RequestInterceptor? = nil) -> UploadRequest {
         let convertible = ParameterlessRequestConvertible(url: url, method: method, headers: headers)
 
-        return upload(multipartFormData: multipartFormData,
+        let formData = MultipartFormData(fileManager: fileManager)
+        multipartFormData(formData)
+
+        return upload(multipartFormData: formData,
                       usingThreshold: encodingMemoryThreshold,
                       with: convertible,
                       interceptor: interceptor)
     }
 
-    open func upload(multipartFormData: @escaping (MultipartFormData) -> Void,
-                     usingThreshold encodingMemoryThreshold: UInt64 = MultipartUpload.encodingMemoryThreshold,
-                     fileManager: FileManager = .default,
+    open func upload(multipartFormData: MultipartFormData,
+                     usingThreshold encodingMemoryThreshold: UInt64 = MultipartFormData.encodingMemoryThreshold,
                      with request: URLRequestConvertible,
                      interceptor: RequestInterceptor? = nil) -> UploadRequest {
         let multipartUpload = MultipartUpload(isInBackgroundSession: (session.configuration.identifier != nil),
                                               encodingMemoryThreshold: encodingMemoryThreshold,
                                               request: request,
-                                              fileManager: fileManager,
-                                              multipartBuilder: multipartFormData)
+                                              multipartFormData: multipartFormData)
 
         return upload(multipartUpload, interceptor: interceptor)
     }
@@ -428,7 +427,7 @@ open class Session {
             if let adapter = adapter(for: request) {
                 adapter.adapt(initialRequest, for: self) { result in
                     do {
-                        let adaptedRequest = try result.unwrap()
+                        let adaptedRequest = try result.get()
 
                         self.rootQueue.async {
                             request.didAdaptInitialRequest(initialRequest, to: adaptedRequest)
@@ -456,7 +455,7 @@ open class Session {
         requestTaskMap[request] = task
         request.didCreateTask(task)
 
-        resumeOrSuspendTask(task, ifNecessaryForRequest: request)
+        updateStatesForTask(task, request: request)
     }
 
     func didReceiveResumeData(_ data: Data, for request: DownloadRequest) {
@@ -466,18 +465,30 @@ open class Session {
         requestTaskMap[request] = task
         request.didCreateTask(task)
 
-        resumeOrSuspendTask(task, ifNecessaryForRequest: request)
+        updateStatesForTask(task, request: request)
     }
 
-    func resumeOrSuspendTask(_ task: URLSessionTask, ifNecessaryForRequest request: Request) {
-        if startRequestsImmediately || request.isResumed {
-            task.resume()
-            request.didResume()
-        }
-
-        if request.isSuspended {
-            task.suspend()
-            request.didSuspend()
+    func updateStatesForTask(_ task: URLSessionTask, request: Request) {
+        request.withState { (state) in
+            switch (startRequestsImmediately, state) {
+            case (true, .initialized):
+                rootQueue.async { request.resume() }
+            case (false, .initialized):
+                // Do nothing.
+                break
+            case (_, .resumed):
+                task.resume()
+                rootQueue.async { request.didResumeTask(task) }
+            case (_, .suspended):
+                task.suspend()
+                rootQueue.async { request.didSuspendTask(task) }
+            case (_, .cancelled):
+                task.cancel()
+                rootQueue.async { request.didCancelTask(task) }
+            case (_, .finished):
+                // Do nothing
+                break
+            }
         }
     }
 
@@ -513,90 +524,36 @@ extension Session: RequestDelegate {
         return session.configuration
     }
 
-    public func willAttemptToRetryRequest(_ request: Request) -> Bool {
-        return retrier(for: request) != nil
+    public func retryResult(for request: Request, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        guard let retrier = retrier(for: request) else {
+            rootQueue.async { completion(.doNotRetry) }
+            return
+        }
+
+        retrier.retry(request, for: self, dueTo: error) { retryResult in
+            self.rootQueue.async {
+                guard let retryResultError = retryResult.error else { completion(retryResult); return }
+
+                let retryError = AFError.requestRetryFailed(retryError: retryResultError, originalError: error)
+                completion(.doNotRetryWithError(retryError))
+            }
+        }
     }
 
-    public func retryRequest(_ request: Request, ifNecessaryWithError error: Error) {
-        guard let retrier = retrier(for: request) else { request.finish(); return }
-
-        retrier.retry(request, for: self, dueTo: error) { result in
-            guard !request.isCancelled else { return }
-
-            self.rootQueue.async {
+    public func retryRequest(_ request: Request, withDelay timeDelay: TimeInterval?) {
+        self.rootQueue.async {
+            let retry: () -> Void = {
                 guard !request.isCancelled else { return }
 
-                if result.retryRequired {
-                    let retry: () -> Void = {
-                        guard !request.isCancelled else { return }
-
-                        request.requestIsRetrying()
-                        self.perform(request)
-                    }
-
-                    if let retryDelay = result.delay {
-                        self.rootQueue.after(retryDelay) { retry() }
-                    } else {
-                        self.rootQueue.async { retry() }
-                    }
-                } else {
-                    var retryError = error
-
-                    if let retryResultError = result.error {
-                        retryError = AFError.requestRetryFailed(retryError: retryResultError, originalError: error)
-                    }
-
-                    request.finish(error: retryError)
-                }
-            }
-        }
-    }
-
-    public func cancelRequest(_ request: Request) {
-        rootQueue.async {
-            guard let task = self.requestTaskMap[request] else {
-                request.didCancel()
-                request.finish()
-                return
+                request.prepareForRetry()
+                self.perform(request)
             }
 
-            task.cancel()
-            request.didCancel()
-        }
-    }
-
-    public func cancelDownloadRequest(_ request: DownloadRequest, byProducingResumeData: @escaping (Data?) -> Void) {
-        rootQueue.async {
-            guard let downloadTask = self.requestTaskMap[request] as? URLSessionDownloadTask else {
-                request.didCancel()
-                request.finish()
-                return
+            if let retryDelay = timeDelay {
+                self.rootQueue.after(retryDelay) { retry() }
+            } else {
+                retry()
             }
-
-            downloadTask.cancel { (data) in
-                self.rootQueue.async {
-                    byProducingResumeData(data)
-                    request.didCancel()
-                }
-            }
-        }
-    }
-
-    public func suspendRequest(_ request: Request) {
-        rootQueue.async {
-            guard !request.isCancelled, let task = self.requestTaskMap[request] else { return }
-
-            task.suspend()
-            request.didSuspend()
-        }
-    }
-
-    public func resumeRequest(_ request: Request) {
-        rootQueue.async {
-            guard !request.isCancelled, let task = self.requestTaskMap[request] else { return }
-
-            task.resume()
-            request.didResume()
         }
     }
 }
@@ -608,8 +565,12 @@ extension Session: SessionStateProvider {
         return requestTaskMap[task]
     }
 
+    public func didGatherMetricsForTask(_ task: URLSessionTask) {
+        requestTaskMap.disassociateIfNecessaryAfterGatheringMetricsForTask(task)
+    }
+
     public func didCompleteTask(_ task: URLSessionTask) {
-        requestTaskMap[task] = nil
+        requestTaskMap.disassociateIfNecessaryAfterCompletingTask(task)
     }
 
     public func credential(for task: URLSessionTask, in protectionSpace: URLProtectionSpace) -> URLCredential? {

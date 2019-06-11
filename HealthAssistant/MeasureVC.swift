@@ -17,6 +17,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var timerLbl: UILabel!
     @IBOutlet weak var startMeasuringBttn: UIButton!
     @IBOutlet weak var optionsTableView: UITableView!
+    @IBOutlet weak var backgroundColorView: UIView!
     
     let motion = CMMotionManager()
     var timer: Timer!
@@ -28,7 +29,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var measurementOptions = [MeasurmentOption]()
     var brokenImg: UIImage!
     var selectedMeasurmentOptions = [String]()
-    
+    var measureStarted = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,14 +96,28 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func startGyroPressed(_ sender: Any) {
-        if selectedMeasurmentOptions.contains("Aktivnost") {
-            if collectingData == false {
-                dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
-                startGyros()
-                collectingData = true
-            }
+        if measureStarted {
+            startMeasuringBttn.setImage(#imageLiteral(resourceName: "start_btn_icon"), for: .normal)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backgroundColorView.backgroundColor = UIColor(red: 55/255, green: 229/255, blue: 174/255, alpha: 1.0)
+            })
+            stopGyros()
+            measureStarted = false
         } else {
-            Util.displayInformation(self, title: "Niste izabrali opcije za merenje", message: "Izaberite opcije i pokusajte ponovo.")
+            if selectedMeasurmentOptions.contains("Aktivnost") {
+                if collectingData == false {
+                    dataTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateDataTimer), userInfo: nil, repeats: true)
+                    startGyros()
+                    startMeasuringBttn.setImage(#imageLiteral(resourceName: "stop_btn_icon"), for: .normal)
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundColorView.backgroundColor = UIColor(red: 225/255, green: 104/255, blue: 104/255, alpha: 1.0)
+                    })
+                    collectingData = true
+                    measureStarted = true
+                }
+            } else {
+                Util.displayInformation(self, title: "Niste izabrali opcije za merenje", message: "Izaberite opcije i pokusajte ponovo.")
+            }
         }
     }
     @IBAction func stopGyroPressed(_ sender: Any) {
@@ -114,14 +129,14 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         timerLbl.text = "\(timeLeft) seconds until data is sent"
         if timeLeft <= 0 {
             if !gatheredSensorData.isEmpty {
-                let isConnectedToWifi = check()
-                if isConnectedToWifi {
+//                let isConnectedToWifi = check()
+//                if isConnectedToWifi {
                     API.instance.sendSensorData(sensorData: gatheredSensorData)
-                } else {
-                    Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
-                        API.instance.sendSensorData(sensorData: self.gatheredSensorData)
-                    }
-                }
+//                } else {
+//                    Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
+//                        API.instance.sendSensorData(sensorData: self.gatheredSensorData)
+//                    }
+//                }
             }
             timeLeft = 15
         }
@@ -180,16 +195,16 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.motion.stopAccelerometerUpdates()
         }
         if !gatheredSensorData.isEmpty {
-            let isConnectedToWifi = check()
-            if isConnectedToWifi {
+//            let isConnectedToWifi = check()
+//            if isConnectedToWifi {
                 API.instance.sendSensorData(sensorData: gatheredSensorData)
                 gatheredSensorData.removeAll()
-            } else {
-                Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
-                    API.instance.sendSensorData(sensorData: self.gatheredSensorData)
-                    self.gatheredSensorData.removeAll()
-                }
-            }
+//            } else {
+//                Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
+//                    API.instance.sendSensorData(sensorData: self.gatheredSensorData)
+//                    self.gatheredSensorData.removeAll()
+//                }
+//            }
         }
         dataTimer?.invalidate()
         dataTimer = nil

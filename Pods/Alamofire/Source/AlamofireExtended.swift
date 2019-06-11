@@ -1,5 +1,5 @@
 //
-//  URLRequest+Alamofire.swift
+//  AlamofireExtended.swift
 //
 //  Copyright (c) 2019 Alamofire Software Foundation (http://alamofire.org/)
 //
@@ -22,12 +22,34 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+/// Type that acts as a generic extension point for all `AlamofireExtended` types.
+public struct AlamofireExtension<ExtendedType> {
+    /// Stores the type or metatype of any extended type.
+    let type: ExtendedType
 
-public extension URLRequest {
-    /// Returns the `httpMethod` as Alamofire's `HTTPMethod` type.
-    var method: HTTPMethod? {
-        get { return httpMethod.flatMap(HTTPMethod.init) }
-        set { httpMethod = newValue?.rawValue }
+    init(_ type: ExtendedType) {
+        self.type = type
+    }
+}
+
+/// Protocol describing the `af` extension points for Alamofire extended types.
+public protocol AlamofireExtended {
+    associatedtype ExtendedType
+
+    /// Static Alamofire extension point.
+    static var af: AlamofireExtension<ExtendedType>.Type { get set }
+    /// Instance Alamofire extension point.
+    var af: AlamofireExtension<ExtendedType> { get set }
+}
+
+public extension AlamofireExtended {
+    static var af: AlamofireExtension<Self>.Type {
+        get { return AlamofireExtension<Self>.self }
+        set { }
+    }
+
+    var af: AlamofireExtension<Self> {
+        get { return AlamofireExtension(self) }
+        set { }
     }
 }
