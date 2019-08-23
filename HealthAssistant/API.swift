@@ -85,14 +85,12 @@ class API {
         }
         let params: [String: Any] = ["user_id": "\(API.instance.user?.name ?? "1")", "source": "ios", "data": measurments]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
-            .responseJSON { response in
+            .responseString { response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data)
-                    let status = json["status"]
-                    print(status)
-                case .failure(let err):
-                    print(err)
+                    print("success")
+                case .failure(let failure):
+                    print("fail")
                 }
         }
     }

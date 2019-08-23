@@ -18,6 +18,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var startMeasuringBttn: UIButton!
     @IBOutlet weak var optionsTableView: UITableView!
     @IBOutlet weak var backgroundColorView: UIView!
+    @IBOutlet weak var measureStatusLbl: UILabel!
     
     let motion = CMMotionManager()
     var timer: Timer!
@@ -101,6 +102,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             UIView.animate(withDuration: 0.3, animations: {
                 self.backgroundColorView.backgroundColor = UIColor(red: 55/255, green: 229/255, blue: 174/255, alpha: 1.0)
             })
+            measureStatusLbl.text = "Pokrenite merenje"
             stopGyros()
             measureStarted = false
         } else {
@@ -112,6 +114,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.backgroundColorView.backgroundColor = UIColor(red: 225/255, green: 104/255, blue: 104/255, alpha: 1.0)
                     })
+                    measureStatusLbl.text = "Zaustavite merenje"
                     collectingData = true
                     measureStarted = true
                 }

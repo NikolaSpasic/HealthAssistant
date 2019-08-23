@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7213C0A8230FF76D00E5DB52 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213C0A7230FF76D00E5DB52 /* HomeVC.swift */; };
+		7213C0AA230FF92600E5DB52 /* resultsTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213C0A9230FF92600E5DB52 /* resultsTableviewCell.swift */; };
+		7213C0AC23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213C0AB23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift */; };
 		726FE49122830B71006B648B /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726FE49022830B71006B648B /* SensorData.swift */; };
 		72FE365A228458EF005F7F86 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */; };
 		72FE365C22845ABD005F7F86 /* MeasurementOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE365B22845ABD005F7F86 /* MeasurementOption.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7213C0A7230FF76D00E5DB52 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		7213C0A9230FF92600E5DB52 /* resultsTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resultsTableviewCell.swift; sourceTree = "<group>"; };
+		7213C0AB23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCollectionViewCell.swift; sourceTree = "<group>"; };
 		726FE49022830B71006B648B /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		72FE365B22845ABD005F7F86 /* MeasurementOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementOption.swift; sourceTree = "<group>"; };
@@ -70,6 +76,16 @@
 				C9D771714BCEBAC5F5D4AD85 /* libPods-HealthAssistant.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7213C0AD23100BD400E5DB52 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */,
+				7213C0A9230FF92600E5DB52 /* resultsTableviewCell.swift */,
+				7213C0AB23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		726FE49222830B99006B648B /* Models */ = {
@@ -116,13 +132,13 @@
 				F9B8D7C92253944D00742517 /* API.swift */,
 				726FE49222830B99006B648B /* Models */,
 				F9B8D7CB2253946000742517 /* ViewControllers */,
+				7213C0AD23100BD400E5DB52 /* Cells */,
 				F925CFA0224A2213009E7138 /* Main.storyboard */,
 				F925CFA3224A221E009E7138 /* Assets.xcassets */,
 				F925CFA5224A221E009E7138 /* LaunchScreen.storyboard */,
 				F925CFA8224A221E009E7138 /* Info.plist */,
 				F9D9D79B2254F0940004E5E8 /* Spinner.swift */,
 				F9D9D79D2254F6670004E5E8 /* Util.swift */,
-				72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */,
 			);
 			path = HealthAssistant;
 			sourceTree = "<group>";
@@ -136,6 +152,7 @@
 				F925CFAE224A35CB009E7138 /* LogInRegisterVC.swift */,
 				F9169103224A3D1200EF1BD3 /* MeasureVC.swift */,
 				F9D9D7972254B30B0004E5E8 /* ProfileVC.swift */,
+				7213C0A7230FF76D00E5DB52 /* HomeVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -237,15 +254,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7213C0AC23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift in Sources */,
 				72FE365A228458EF005F7F86 /* OptionsTableViewCell.swift in Sources */,
 				72FE365C22845ABD005F7F86 /* MeasurementOption.swift in Sources */,
 				F9D9D79E2254F6670004E5E8 /* Util.swift in Sources */,
 				F925CF9F224A2213009E7138 /* SplashVC.swift in Sources */,
 				F925CF9D224A2213009E7138 /* AppDelegate.swift in Sources */,
 				F925CFB1224A37A2009E7138 /* logInVC.swift in Sources */,
+				7213C0A8230FF76D00E5DB52 /* HomeVC.swift in Sources */,
 				F925CFAF224A35CB009E7138 /* LogInRegisterVC.swift in Sources */,
 				F9D9D7982254B30B0004E5E8 /* ProfileVC.swift in Sources */,
 				F9D9D79A2254DA210004E5E8 /* User.swift in Sources */,
+				7213C0AA230FF92600E5DB52 /* resultsTableviewCell.swift in Sources */,
 				F9B8D7CD225394E900742517 /* RegisterVC.swift in Sources */,
 				F9B8D7CA2253944D00742517 /* API.swift in Sources */,
 				F9169104224A3D1200EF1BD3 /* MeasureVC.swift in Sources */,

@@ -1,18 +1,18 @@
 //
-//  OptionsTableViewCell.swift
+//  resultsTableviewCell.swift
 //  HealthAssistant
 //
-//  Created by Slavimir Stosovic on 5/9/19.
+//  Created by Slavimir Stosovic on 8/23/19.
 //  Copyright © 2019 VTS AppsTeam. All rights reserved.
 //
 
 import UIKit
 
-class OptionsTableViewCell: UITableViewCell {
-    @IBOutlet weak var optionImageView: UIImageView!
-    @IBOutlet weak var optionLbl: UILabel!
-    @IBOutlet weak var optionIllustration: UIImageView!
-    @IBOutlet weak var optionChecked: UIImageView!
+class resultsTableviewCell: UITableViewCell {
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var activityNameLbl: UILabel!
+    @IBOutlet weak var lineImageView: UIImageView!
+    @IBOutlet weak var measurementValueLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class OptionsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         self.bounds = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: UIScreen.main.bounds.width - 60, height: self.bounds.size.height)
-        optionChecked.frame = CGRect(x: self.frame.maxX - optionChecked.bounds.width - 60 - 15, y: optionChecked.frame.origin.y, width: optionChecked.frame.width, height: optionChecked.frame.height)
+        measurementValueLbl.frame = CGRect(x: self.frame.maxX - measurementValueLbl.bounds.width - 60 - 15, y: measurementValueLbl.frame.origin.y, width: measurementValueLbl.frame.width, height: measurementValueLbl.frame.height)
         let shadowPath = UIBezierPath(rect: self.bounds)
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.lightGray.cgColor
@@ -36,4 +36,5 @@ class OptionsTableViewCell: UITableViewCell {
         self.layer.shadowRadius = 6
         self.layer.shadowPath = shadowPath.cgPath
     }
+
 }
