@@ -13,30 +13,33 @@ import SwiftyJSON
 class API {
     
     static let instance = API()
-    let api = "http://ha.itcentar.rs"
-//    let api = "172.16.40.108"
+    let api = "http://miske77.pythonanywhere.com"
     var user: User?
     
     func register(ime: String, prezime: String, email: String, password: String, completion: @escaping (Bool) -> ()) {
         let parameters = ["name": ime, "lastname": prezime, "email": email, "password": password, "role": "PATIENT"]
         AF.request("\(api)/api/registration", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data)
                     let status = json["status"]
+                    print(response.response?.statusCode)
                     if status.intValue == 200 {
                         let userData = json["entity"]
+                        print(userData)
                         let userName = userData["name"].stringValue
                         let userLastName = userData["lastname"].stringValue
                         let userToken = userData["token"].stringValue
                         let userEmail = userData["email"].stringValue
-                        self.user = User(names: userName, lastname: userLastName, Email: userEmail, tokens: userToken, pass: password)
+                        let userId = userData["id"].stringValue
+                        self.user = User(names: userName, lastname: userLastName, Email: userEmail, tokens: userToken, pass: password, id: userId)
                         completion(true)
                     } else {
                         completion(false)
                     }
                 case .failure(let err):
+                    print("fail")
                     print(err)
                     completion(false)
                 }
@@ -50,6 +53,7 @@ class API {
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data)
+                    print("gets here \(json)")
                     let status = json["status"]
                     if status.intValue == 200 {
                         let userData = json["entity"]
@@ -57,7 +61,8 @@ class API {
                         let userLastName = userData["lastname"].stringValue
                         let userToken = userData["token"].stringValue
                         let userEmail = userData["email"].stringValue
-                        self.user = User(names: userName, lastname: userLastName, Email: userEmail, tokens: userToken, pass: password)
+                        let userId = userData["id"].stringValue
+                        self.user = User(names: userName, lastname: userLastName, Email: userEmail, tokens: userToken, pass: password, id: userId)
                         completion(true)
                     } else {
                         completion(false)
@@ -83,14 +88,15 @@ class API {
             ]
             measurments.append(measurmentObject)
         }
-        let params: [String: Any] = ["user_id": "\(API.instance.user?.name ?? "1")", "source": "ios", "data": measurments]
+        let params: [String: Any] = ["user_id": "\(API.instance.user?.id ?? "1")", "source": "ios", "data": measurments]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
             .responseString { response in
                 switch response.result {
                 case .success(let data):
                     print("success")
+                    print(data)
                 case .failure(let failure):
-                    print("fail")
+                    print("fail \(failure)")
                 }
         }
     }

@@ -14,13 +14,15 @@ class User {
     var email: String?
     var password: String?
     var token: String?
+    var id: String?
     
-    init(names: String, lastname: String, Email: String, tokens: String, pass: String) {
+    init(names: String, lastname: String, Email: String, tokens: String, pass: String, id: String) {
         name = names
         lastName = lastname
         email = Email
         token = tokens
         password = pass
+        self.id = id
         
         let defaults = UserDefaults.standard
         defaults.set(email, forKey: "email")
@@ -28,12 +30,14 @@ class User {
         defaults.set(token, forKey: "token")
         defaults.set(name, forKey: "name")
         defaults.set(lastName, forKey: "lastname")
+        defaults.set(self.id, forKey: "id")
     }
-    init(named: String, lastname: String, Email: String, tokens: String, pass: String) {
+    init(named: String, lastname: String, Email: String, tokens: String, pass: String, ids: String) {
         name = named
         lastName = lastname
         email = Email
         token = tokens
         password = pass
+        id = ids
     }
 }

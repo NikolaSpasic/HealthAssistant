@@ -147,12 +147,12 @@
 			isa = PBXGroup;
 			children = (
 				F925CF9E224A2213009E7138 /* SplashVC.swift */,
+				7213C0A7230FF76D00E5DB52 /* HomeVC.swift */,
 				F925CFB0224A37A2009E7138 /* logInVC.swift */,
 				F9B8D7CC225394E900742517 /* RegisterVC.swift */,
 				F925CFAE224A35CB009E7138 /* LogInRegisterVC.swift */,
 				F9169103224A3D1200EF1BD3 /* MeasureVC.swift */,
 				F9D9D7972254B30B0004E5E8 /* ProfileVC.swift */,
-				7213C0A7230FF76D00E5DB52 /* HomeVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

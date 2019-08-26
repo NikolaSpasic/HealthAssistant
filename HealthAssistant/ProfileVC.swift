@@ -24,6 +24,10 @@ class ProfileVC: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        logOutBttn.layer.cornerRadius = 7
+    }
+    
 
     @IBAction func logOutBttnPressed(_ sender: Any) {
         let defaults = UserDefaults.standard

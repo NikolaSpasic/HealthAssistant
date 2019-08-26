@@ -27,7 +27,7 @@ class OptionsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         self.bounds = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: UIScreen.main.bounds.width - 60, height: self.bounds.size.height)
-        optionChecked.frame = CGRect(x: self.frame.maxX - optionChecked.bounds.width - 60 - 15, y: optionChecked.frame.origin.y, width: optionChecked.frame.width, height: optionChecked.frame.height)
+        optionChecked.frame = CGRect(x: self.frame.maxX - optionChecked.bounds.width - 60 - 10, y: optionChecked.frame.origin.y, width: optionChecked.frame.width, height: optionChecked.frame.height)
         let shadowPath = UIBezierPath(rect: self.bounds)
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.lightGray.cgColor

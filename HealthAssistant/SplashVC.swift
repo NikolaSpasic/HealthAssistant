@@ -21,12 +21,11 @@ class SplashVC: UIViewController {
         let token = defaults.object(forKey: "token") as? String
         let lastname = defaults.object(forKey: "lastname") as? String
         let name = defaults.object(forKey: "name") as? String
-        if email != nil && pass != nil && token != nil && lastname != nil && name != nil {
-            let user = User(named: name!, lastname: lastname!, Email: email!, tokens: token!, pass: pass!)
+        let id = defaults.object(forKey: "id") as? String
+        if email != nil && pass != nil && token != nil && lastname != nil && name != nil && id != nil {
+            let user = User(named: name!, lastname: lastname!, Email: email!, tokens: token!, pass: pass!, ids: id!)
             API.instance.user = user
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: "homeVC")
-            self.present(newViewController, animated: true, completion: nil)
+            performSegue(withIdentifier: "presentHomeVC", sender: nil)
         } else {
             performSegue(withIdentifier: "showLogIn", sender: nil)
         }

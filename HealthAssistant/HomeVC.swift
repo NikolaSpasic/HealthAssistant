@@ -8,11 +8,12 @@
 
 import UIKit
 
-class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var activitiesCollectionView: UICollectionView!
     @IBOutlet weak var resultsTableview: UITableView!
     var measurmentResults = [MeasurmentOption]()
+    var executed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
         resultsTableview.delegate = self
         resultsTableview.dataSource = self
         resultsTableview.tableFooterView = UIView()
-        resultsTableview.rowHeight = 70
+        resultsTableview.rowHeight = 90
         resultsTableview.allowsSelection = false
         
         measurmentResults.append(MeasurmentOption(logoimg: UIImage(named: "activity_icon") ?? brokenImg, illustrationImg: UIImage(named: "activity_lines") ?? brokenImg, activityName: "Aktivnost"))
@@ -32,9 +33,17 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
     
     override func viewDidLayoutSubviews() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 30, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 4, height: activitiesCollectionView.bounds.height - 20)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 15
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         activitiesCollectionView.collectionViewLayout = layout
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        if !executed {
+            activitiesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
+            executed = true
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,16 +65,19 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "resultsTimeCell", for: indexPath) as! ActivitiesCollectionViewCell
+        cell.layer.cornerRadius = 7
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0).cgColor
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat((collectionView.frame.size.width / 3) - 20), height: CGFloat(100))
+        return CGSize(width: UIScreen.main.bounds.width / 3 - 15, height: UIScreen.main.bounds.height / 4 - 20)
     }
     /*
     // MARK: - Navigation
