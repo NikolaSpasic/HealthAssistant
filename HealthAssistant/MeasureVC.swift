@@ -124,6 +124,11 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     @IBAction func stopGyroPressed(_ sender: Any) {
+        startMeasuringBttn.setImage(#imageLiteral(resourceName: "start_btn_icon"), for: .normal)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backgroundColorView.backgroundColor = UIColor(red: 55/255, green: 229/255, blue: 174/255, alpha: 1.0)
+        })
+        measureStarted = false
         stopGyros()
     }
     
