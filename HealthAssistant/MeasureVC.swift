@@ -32,6 +32,8 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var selectedMeasurmentOptions = [String]()
     var measureStarted = false
     
+    var api = API.instance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         brokenImg = UIColor.black.image()
@@ -139,7 +141,11 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if !gatheredSensorData.isEmpty {
 //                let isConnectedToWifi = check()
 //                if isConnectedToWifi {
-                    API.instance.sendSensorData(sensorData: gatheredSensorData)
+                for measurment in gatheredSensorData {
+                    api.temporarySensorData.append(measurment)
+                }
+                api.sendSensorData(sensorData: api.temporarySensorData)
+                gatheredSensorData.removeAll()
 //                } else {
 //                    Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {
 //                        API.instance.sendSensorData(sensorData: self.gatheredSensorData)
@@ -205,7 +211,10 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if !gatheredSensorData.isEmpty {
 //            let isConnectedToWifi = check()
 //            if isConnectedToWifi {
-                API.instance.sendSensorData(sensorData: gatheredSensorData)
+            for measurment in gatheredSensorData {
+                api.temporarySensorData.append(measurment)
+            }
+                api.sendSensorData(sensorData: api.temporarySensorData)
                 gatheredSensorData.removeAll()
 //            } else {
 //                Util.displayDialog(self, title: "Your phone isn't connected to wifi.", message: "Do you want to send data to server anyway?") {

@@ -15,6 +15,7 @@ class API {
     static let instance = API()
     let api = "http://miske77.pythonanywhere.com"
     var user: User?
+    var temporarySensorData = [SensorData]()
     
     func register(ime: String, prezime: String, email: String, password: String, completion: @escaping (Bool) -> ()) {
         let parameters = ["name": ime, "lastname": prezime, "email": email, "password": password, "role": "PATIENT"]
@@ -94,6 +95,7 @@ class API {
                 switch response.result {
                 case .success(let data):
                     print("success")
+                    API.instance.temporarySensorData.removeAll()
                     print(data)
                 case .failure(let failure):
                     print("fail \(failure)")
