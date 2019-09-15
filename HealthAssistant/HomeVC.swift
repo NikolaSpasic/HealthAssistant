@@ -14,6 +14,8 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
     @IBOutlet weak var resultsTableview: UITableView!
     var measurmentResults = [MeasurmentOption]()
     var executed = false
+    var api = API.instance
+    var didReturnOne = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +42,13 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        if !executed {
             activitiesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
             executed = true
-//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let userId = API.instance.user.id else { return }
+        API.instance.getActivities(userId: userId)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,7 +70,12 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        if api.activities.count == 0 {
+            didReturnOne = true
+            return 1
+        } else {
+            return API.instance.activities.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -73,6 +83,16 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
         cell.layer.cornerRadius = 7
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0).cgColor
+        
+        if !didReturnOne {
+            cell.activityNameLbl.text = api.activities[indexPath.item].name
+            
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .short
+            let formattedString = formatter.string(from: TimeInterval(Int(api.activities[indexPath.item].time)!))
+            cell.activityTimeLbl.text = formattedString
+        }
         return cell
     }
     

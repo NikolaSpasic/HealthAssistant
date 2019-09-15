@@ -36,6 +36,7 @@ class ProfileVC: UIViewController {
         defaults.removeObject(forKey: "token")
         defaults.removeObject(forKey: "name")
         defaults.removeObject(forKey: "lastname")
+        defaults.removeObject(forKey: "activities")
         defaults.synchronize()
         self.dismiss(animated: true, completion: nil)
     }

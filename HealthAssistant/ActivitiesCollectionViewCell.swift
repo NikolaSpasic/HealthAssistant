@@ -9,6 +9,10 @@
 import UIKit
 
 class ActivitiesCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var activityTimeLbl: UILabel!
+    @IBOutlet weak var activityNameLbl: UILabel!
+    
     override func layoutSubviews() {
         let shadowPath = UIBezierPath(rect: self.bounds)
         self.layer.masksToBounds = false

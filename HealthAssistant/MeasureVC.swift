@@ -164,7 +164,7 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.motion.accelerometerUpdateInterval = 1.0 / 60.0
                 self.motion.startAccelerometerUpdates()
                 // Configure a timer to fetch the accelerometer data.
-                self.timer = Timer(fire: Date(), interval: 0.1,
+                self.timer = Timer(fire: Date(), interval: 1/50,
                                    repeats: true, block: { (timer) in
                                     // Get the gyro data.
                                     if let gyroData = self.motion.gyroData {
@@ -180,7 +180,18 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                                             self.accelerLbl.text = "Acc data: \n \(accx) \n \(accy) \n \(accz)"
                                             
                                             self.gyroLbl.text = "Gyro data: \n \(gyrox) \n \(gyroy) \n \(gyroz)"
-                                            let singleReading = SensorData(accx: accx, accy: accy, accz: accz, gyx: gyrox, gyy: gyroy, gyz: gyroz)
+                                            
+                                            let date = Date()
+                                            let calendar = Calendar.current
+                                            let year = calendar.component(.year, from: date)
+                                            let month = calendar.component(.month, from: date)
+                                            let day = calendar.component(.day, from: date)
+                                            let hour = calendar.component(.hour, from: date)
+                                            let minutes = calendar.component(.minute, from: date)
+                                            let seconds = calendar.component(.second, from: date)
+                                            let timestamp = "\(year)-\(month)-\(day) \(hour):\(minutes):\(seconds)"
+                                            
+                                            let singleReading = SensorData(accx: accx, accy: accy, accz: accz, gyx: gyrox, gyy: gyroy, gyz: gyroz, time: timestamp)
                                             self.gatheredSensorData.append(singleReading)
                                         }
                                     }

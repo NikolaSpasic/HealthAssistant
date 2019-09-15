@@ -25,9 +25,42 @@ class SplashVC: UIViewController {
         if email != nil && pass != nil && token != nil && lastname != nil && name != nil && id != nil {
             let user = User(named: name!, lastname: lastname!, Email: email!, tokens: token!, pass: pass!, ids: id!)
             API.instance.user = user
+            unarchiveData()
+            uncarchiveActivities()
+            if !API.instance.temporarySensorData.isEmpty {
+                API.instance.sendSensorData(sensorData: API.instance.temporarySensorData)
+            }
             performSegue(withIdentifier: "presentHomeVC", sender: nil)
         } else {
             performSegue(withIdentifier: "showLogIn", sender: nil)
+        }
+    }
+    
+    func uncarchiveActivities() {
+        let userDefaults = UserDefaults.standard
+        let decoded = userDefaults.data(forKey: "activities")
+        do {
+            if let decodedExists = decoded {
+                if let decodedActivities = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decodedExists) as? [Activity] {
+                    API.instance.activities = decodedActivities
+                }
+            }
+        } catch {
+            print("couldn't decode activities")
+        }
+    }
+    
+    func unarchiveData() {
+        let userDefaults = UserDefaults.standard
+        let decoded = userDefaults.data(forKey: "failedMeasureData")
+        do {
+            if let decodedExists = decoded {
+                if let decodedMeasurments = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decodedExists) as? [SensorData] {
+                    API.instance.temporarySensorData = decodedMeasurments
+                }
+            }
+        } catch {
+            print("couldn't read file")
         }
     }
 

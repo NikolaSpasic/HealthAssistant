@@ -14,7 +14,8 @@ class API {
     
     static let instance = API()
     let api = "http://miske77.pythonanywhere.com"
-    var user: User?
+    var user: User!
+    var activities = [Activity]()
     var temporarySensorData = [SensorData]()
     
     func register(ime: String, prezime: String, email: String, password: String, completion: @escaping (Bool) -> ()) {
@@ -25,7 +26,6 @@ class API {
                 case .success(let data):
                     let json = JSON(data)
                     let status = json["status"]
-                    print(response.response?.statusCode)
                     if status.intValue == 200 {
                         let userData = json["entity"]
                         print(userData)
@@ -54,7 +54,6 @@ class API {
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data)
-                    print("gets here \(json)")
                     let status = json["status"]
                     if status.intValue == 200 {
                         let userData = json["entity"]
@@ -89,16 +88,53 @@ class API {
             ]
             measurments.append(measurmentObject)
         }
+        print(measurments.count)
         let params: [String: Any] = ["user_id": "\(API.instance.user?.id ?? "1")", "source": "ios", "data": measurments]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
             .responseString { response in
                 switch response.result {
-                case .success(let data):
-                    print("success")
+                case .success(_):
                     API.instance.temporarySensorData.removeAll()
-                    print(data)
                 case .failure(let failure):
+                    let userDefaults = UserDefaults.standard
+                    let encodedData: Data = try! NSKeyedArchiver.archivedData(withRootObject: API.instance.temporarySensorData, requiringSecureCoding: false)
+                    userDefaults.set(encodedData, forKey: "failedMeasureData")
+                    userDefaults.synchronize()
                     print("fail \(failure)")
+                }
+        }
+    }
+    
+    func getActivities(userId: String)  {
+        let parameters = ["user_id": Int(userId)!]
+        AF.request("\(api)/api/get_activity", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                    let json = JSON(data)
+                    let laying = json["laying"]
+                    let sitting = json["sitting"]
+                    let standing = json["standing"]
+                    let walking = json["walking"]
+                    let walkingUpstairs = json["walking_upstairs"]
+                    let walkingDownstairs = json["walking_downstairs"]
+                    let total = json["total"]
+                    self.activities.removeAll()
+                    API.instance.activities.append(Activity(name: "Laying", time: "\(laying)"))
+                    API.instance.activities.append(Activity(name: "Sitting", time: "\(sitting)"))
+                    API.instance.activities.append(Activity(name: "Standing", time: "\(standing)"))
+                    API.instance.activities.append(Activity(name: "Walking", time: "\(walking)"))
+                    API.instance.activities.append(Activity(name: "Walking Upstairs", time: "\(walkingUpstairs)"))
+                    API.instance.activities.append(Activity(name: "Walking downstairs", time: "\(walkingDownstairs)"))
+                    API.instance.activities.append(Activity(name: "Total", time: "\(total)"))
+
+                    let userDefaults = UserDefaults.standard
+                    let encodedData: Data = try! NSKeyedArchiver.archivedData(withRootObject: self.activities, requiringSecureCoding: false)
+                    userDefaults.set(encodedData, forKey: "activities")
+                    userDefaults.synchronize()
+                case .failure(let fail):
+                    print("fail: \(fail)")
                 }
         }
     }

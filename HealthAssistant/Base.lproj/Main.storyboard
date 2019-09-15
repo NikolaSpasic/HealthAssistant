@@ -499,8 +499,8 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mirovanje" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezj-j8-w5A">
-                                                    <rect key="frame" x="21" y="121.5" width="66" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mirovanje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezj-j8-w5A">
+                                                    <rect key="frame" x="5.5" y="121.5" width="97" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -514,6 +514,7 @@
                                         <constraints>
                                             <constraint firstItem="EpT-fG-Y1x" firstAttribute="height" secondItem="b3b-Fb-Pl6" secondAttribute="height" multiplier="0.7" id="6nY-bP-Z56"/>
                                             <constraint firstItem="EpT-fG-Y1x" firstAttribute="leading" secondItem="b3b-Fb-Pl6" secondAttribute="leadingMargin" id="WCX-EP-QPU"/>
+                                            <constraint firstItem="Ezj-j8-w5A" firstAttribute="width" secondItem="b3b-Fb-Pl6" secondAttribute="width" multiplier="0.9" id="Z2e-tx-FRZ"/>
                                             <constraint firstItem="EpT-fG-Y1x" firstAttribute="top" secondItem="b3b-Fb-Pl6" secondAttribute="topMargin" constant="10" id="fZy-nM-KkR"/>
                                             <constraint firstItem="pXu-fu-5I0" firstAttribute="top" secondItem="Ezj-j8-w5A" secondAttribute="bottom" constant="5" id="m1X-dd-nhh"/>
                                             <constraint firstItem="Ezj-j8-w5A" firstAttribute="centerX" secondItem="b3b-Fb-Pl6" secondAttribute="centerX" id="qFm-rh-ThE"/>
@@ -521,6 +522,10 @@
                                             <constraint firstItem="pXu-fu-5I0" firstAttribute="centerX" secondItem="b3b-Fb-Pl6" secondAttribute="centerX" id="rwC-fT-BTF"/>
                                             <constraint firstItem="Ezj-j8-w5A" firstAttribute="top" secondItem="EpT-fG-Y1x" secondAttribute="bottom" constant="5" id="uuF-X7-Ivz"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="activityNameLbl" destination="Ezj-j8-w5A" id="00B-7D-uEz"/>
+                                            <outlet property="activityTimeLbl" destination="pXu-fu-5I0" id="NYY-Lj-fLO"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
