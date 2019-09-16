@@ -732,6 +732,47 @@
             </objects>
             <point key="canvasLocation" x="3800.625" y="43.309859154929576"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="l7q-ko-0yx">
+            <objects>
+                <viewController id="3L9-3C-meS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bMB-Ce-pLR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kz-6n-kwI" userLabel="Green Header View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="DSY-DD-yY8">
+                                        <rect key="frame" x="15" y="30" width="290" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="7ph-Nx-Tzk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2470588235" green="0.90980392160000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="DSY-DD-yY8" firstAttribute="leading" secondItem="5kz-6n-kwI" secondAttribute="leading" constant="15" id="sbs-eN-WN2"/>
+                                    <constraint firstAttribute="bottom" secondItem="DSY-DD-yY8" secondAttribute="bottom" constant="15" id="ua0-zz-6TK"/>
+                                    <constraint firstAttribute="trailing" secondItem="DSY-DD-yY8" secondAttribute="trailing" constant="15" id="whH-lO-Sk7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5kz-6n-kwI" firstAttribute="top" secondItem="bMB-Ce-pLR" secondAttribute="top" id="4dt-NQ-mwx"/>
+                            <constraint firstItem="5kz-6n-kwI" firstAttribute="leading" secondItem="bbM-ml-XeU" secondAttribute="leading" id="hTz-ru-9Ms"/>
+                            <constraint firstItem="5kz-6n-kwI" firstAttribute="trailing" secondItem="bbM-ml-XeU" secondAttribute="trailing" id="jfi-SZ-wQD"/>
+                            <constraint firstItem="DSY-DD-yY8" firstAttribute="top" secondItem="bbM-ml-XeU" secondAttribute="top" constant="10" id="vvq-dx-0mC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bbM-ml-XeU"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="statistic_icon" id="ud6-FD-LHN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RRb-EB-dBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4603" y="43"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="QDk-p2-Uiz">
             <objects>
@@ -746,7 +787,8 @@
                     <connections>
                         <segue destination="qA4-vR-cNw" kind="relationship" relationship="viewControllers" id="jUF-39-tnE"/>
                         <segue destination="bEx-9m-CT4" kind="relationship" relationship="viewControllers" id="8Un-Vu-9eK"/>
-                        <segue destination="Bdl-F2-nju" kind="relationship" relationship="viewControllers" id="LrE-LT-qQ0"/>
+                        <segue destination="3L9-3C-meS" kind="relationship" relationship="viewControllers" id="QVW-h3-5mH"/>
+                        <segue destination="Bdl-F2-nju" kind="relationship" relationship="viewControllers" id="svF-hw-Okv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyb-Pn-VeF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -764,6 +806,7 @@
         <image name="splash" width="194" height="302"/>
         <image name="start_btn_icon" width="58" height="64"/>
         <image name="stationary_icon" width="88" height="88"/>
+        <image name="statistic_icon" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="tjt-x7-V0M"/>
