@@ -310,42 +310,16 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2OH-V3-FjL">
-                                        <rect key="frame" x="212.5" y="99.5" width="97.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-12-xyq">
-                                        <rect key="frame" x="10" y="99.5" width="97.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNR-n9-NGM">
-                                        <rect key="frame" x="139" y="222" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.2470588235" green="0.90980392160000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="YNR-n9-NGM" firstAttribute="centerX" secondItem="WKt-tp-jYQ" secondAttribute="centerX" id="0qk-HV-AtQ"/>
-                                    <constraint firstItem="2OH-V3-FjL" firstAttribute="top" secondItem="RMl-dx-KAI" secondAttribute="top" id="0uk-uk-i1x"/>
-                                    <constraint firstItem="RMl-dx-KAI" firstAttribute="leading" secondItem="GBr-12-xyq" secondAttribute="trailing" constant="10" id="4Ie-sX-x6d"/>
-                                    <constraint firstItem="2OH-V3-FjL" firstAttribute="leading" secondItem="RMl-dx-KAI" secondAttribute="trailing" constant="10" id="6Sp-v6-Ydg"/>
                                     <constraint firstItem="ouE-OO-tgW" firstAttribute="leading" secondItem="WKt-tp-jYQ" secondAttribute="leading" constant="15" id="BWb-jH-9X1"/>
                                     <constraint firstItem="RMl-dx-KAI" firstAttribute="centerX" secondItem="WKt-tp-jYQ" secondAttribute="centerX" id="I2U-cY-OAd"/>
                                     <constraint firstItem="RMl-dx-KAI" firstAttribute="height" secondItem="WKt-tp-jYQ" secondAttribute="height" multiplier="0.3" id="If9-uM-cDg"/>
                                     <constraint firstItem="ouE-OO-tgW" firstAttribute="centerX" secondItem="RMl-dx-KAI" secondAttribute="centerX" id="REF-6m-v38"/>
-                                    <constraint firstAttribute="trailing" secondItem="2OH-V3-FjL" secondAttribute="trailing" constant="10" id="WRL-zp-ph0"/>
                                     <constraint firstItem="RMl-dx-KAI" firstAttribute="centerY" secondItem="WKt-tp-jYQ" secondAttribute="centerY" id="ZpP-Fn-1Cs"/>
                                     <constraint firstAttribute="trailing" secondItem="ouE-OO-tgW" secondAttribute="trailing" constant="15" id="fwm-dh-9OC"/>
-                                    <constraint firstItem="GBr-12-xyq" firstAttribute="leading" secondItem="WKt-tp-jYQ" secondAttribute="leading" constant="10" id="m18-3N-5u6"/>
-                                    <constraint firstItem="GBr-12-xyq" firstAttribute="top" secondItem="RMl-dx-KAI" secondAttribute="top" id="oF6-zd-kil"/>
                                     <constraint firstItem="ouE-OO-tgW" firstAttribute="top" secondItem="RMl-dx-KAI" secondAttribute="bottom" constant="15" id="oFC-yQ-46H"/>
-                                    <constraint firstItem="YNR-n9-NGM" firstAttribute="top" secondItem="ouE-OO-tgW" secondAttribute="bottom" constant="2" id="wkh-wm-u9b"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFS-ws-Ei1">
@@ -451,13 +425,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="ic_masuring_icon" id="L0O-Vy-NFs"/>
                     <connections>
-                        <outlet property="accelerLbl" destination="2OH-V3-FjL" id="sD2-Xa-VPe"/>
                         <outlet property="backgroundColorView" destination="WKt-tp-jYQ" id="O3f-KM-s0v"/>
-                        <outlet property="gyroLbl" destination="GBr-12-xyq" id="DcS-ib-xJ4"/>
                         <outlet property="measureStatusLbl" destination="ouE-OO-tgW" id="Mr4-3e-Pi4"/>
                         <outlet property="optionsTableView" destination="g2m-Gk-QZD" id="s09-Ud-CZ1"/>
                         <outlet property="startMeasuringBttn" destination="RMl-dx-KAI" id="vYw-UK-lhJ"/>
-                        <outlet property="timerLbl" destination="YNR-n9-NGM" id="ksW-BM-MU6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yp-re-npH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -523,6 +494,7 @@
                                             <constraint firstItem="Ezj-j8-w5A" firstAttribute="top" secondItem="EpT-fG-Y1x" secondAttribute="bottom" constant="5" id="uuF-X7-Ivz"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityImage" destination="EpT-fG-Y1x" id="5Ft-LU-pTR"/>
                                             <outlet property="activityNameLbl" destination="Ezj-j8-w5A" id="00B-7D-uEz"/>
                                             <outlet property="activityTimeLbl" destination="pXu-fu-5I0" id="NYY-Lj-fLO"/>
                                         </connections>
@@ -732,10 +704,10 @@
             </objects>
             <point key="canvasLocation" x="3800.625" y="43.309859154929576"/>
         </scene>
-        <!--View Controller-->
+        <!--StatsVC-->
         <scene sceneID="l7q-ko-0yx">
             <objects>
-                <viewController id="3L9-3C-meS" sceneMemberID="viewController">
+                <viewController id="3L9-3C-meS" customClass="StatsVC" customModule="HealthAssistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bMB-Ce-pLR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -757,10 +729,18 @@
                                     <constraint firstAttribute="trailing" secondItem="DSY-DD-yY8" secondAttribute="trailing" constant="15" id="whH-lO-Sk7"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Yy-xM-fLS" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="15" y="85" width="290" height="284"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5kz-6n-kwI" firstAttribute="top" secondItem="bMB-Ce-pLR" secondAttribute="top" id="4dt-NQ-mwx"/>
+                            <constraint firstItem="4Yy-xM-fLS" firstAttribute="leading" secondItem="bbM-ml-XeU" secondAttribute="leading" constant="15" id="9Ce-JZ-cSf"/>
+                            <constraint firstItem="4Yy-xM-fLS" firstAttribute="top" secondItem="5kz-6n-kwI" secondAttribute="bottom" constant="20" id="Ccm-Mu-CMY"/>
+                            <constraint firstItem="4Yy-xM-fLS" firstAttribute="height" secondItem="bMB-Ce-pLR" secondAttribute="height" multiplier="0.5" id="SQ2-iH-Mje"/>
+                            <constraint firstItem="bbM-ml-XeU" firstAttribute="trailing" secondItem="4Yy-xM-fLS" secondAttribute="trailing" constant="15" id="SXX-V2-PDk"/>
                             <constraint firstItem="5kz-6n-kwI" firstAttribute="leading" secondItem="bbM-ml-XeU" secondAttribute="leading" id="hTz-ru-9Ms"/>
                             <constraint firstItem="5kz-6n-kwI" firstAttribute="trailing" secondItem="bbM-ml-XeU" secondAttribute="trailing" id="jfi-SZ-wQD"/>
                             <constraint firstItem="DSY-DD-yY8" firstAttribute="top" secondItem="bbM-ml-XeU" secondAttribute="top" constant="10" id="vvq-dx-0mC"/>
@@ -768,6 +748,9 @@
                         <viewLayoutGuide key="safeArea" id="bbM-ml-XeU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="statistic_icon" id="ud6-FD-LHN"/>
+                    <connections>
+                        <outlet property="pieChart" destination="4Yy-xM-fLS" id="egg-Vu-jhY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RRb-EB-dBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

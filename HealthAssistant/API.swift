@@ -28,7 +28,6 @@ class API {
                     let status = json["status"]
                     if status.intValue == 200 {
                         let userData = json["entity"]
-                        print(userData)
                         let userName = userData["name"].stringValue
                         let userLastName = userData["lastname"].stringValue
                         let userToken = userData["token"].stringValue
@@ -88,7 +87,6 @@ class API {
             ]
             measurments.append(measurmentObject)
         }
-        print(measurments.count)
         let params: [String: Any] = ["user_id": "\(API.instance.user?.id ?? "1")", "source": "ios", "data": measurments]
         AF.request("\(api)/api/data", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil)
             .responseString { response in
@@ -111,7 +109,6 @@ class API {
             .responseJSON { response in
                 switch response.result {
                 case .success(let data):
-                    print(data)
                     let json = JSON(data)
                     let laying = json["laying"]
                     let sitting = json["sitting"]
@@ -121,13 +118,13 @@ class API {
                     let walkingDownstairs = json["walking_downstairs"]
                     let total = json["total"]
                     self.activities.removeAll()
-                    API.instance.activities.append(Activity(name: "Laying", time: "\(laying)"))
-                    API.instance.activities.append(Activity(name: "Sitting", time: "\(sitting)"))
-                    API.instance.activities.append(Activity(name: "Standing", time: "\(standing)"))
-                    API.instance.activities.append(Activity(name: "Walking", time: "\(walking)"))
-                    API.instance.activities.append(Activity(name: "Walking Upstairs", time: "\(walkingUpstairs)"))
-                    API.instance.activities.append(Activity(name: "Walking downstairs", time: "\(walkingDownstairs)"))
-                    API.instance.activities.append(Activity(name: "Total", time: "\(total)"))
+                    API.instance.activities.append(Activity(name: "Lezanje", time: "\(laying)", imageName: "walking_icon"))
+                    API.instance.activities.append(Activity(name: "Sedenje", time: "\(sitting)", imageName: "stationary_icon"))
+                    API.instance.activities.append(Activity(name: "Stajanje", time: "\(standing)", imageName: "walking_icon"))
+                    API.instance.activities.append(Activity(name: "Setanje", time: "\(walking)", imageName: "running_icon"))
+                    API.instance.activities.append(Activity(name: "Hodanje uz stepenice", time: "\(walkingUpstairs)", imageName: "running_icon"))
+                    API.instance.activities.append(Activity(name: "Hodanje niz stepenice", time: "\(walkingDownstairs)", imageName: "running_icon"))
+                    API.instance.activities.append(Activity(name: "Ukupno", time: "\(total)", imageName: "walking_icon"))
 
                     let userDefaults = UserDefaults.standard
                     let encodedData: Data = try! NSKeyedArchiver.archivedData(withRootObject: self.activities, requiringSecureCoding: false)

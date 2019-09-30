@@ -30,7 +30,7 @@ class SensorData: NSObject, NSCoding {
         timestamp = time
     }
     required convenience init(coder aDecoder: NSCoder) {
-        let ax = aDecoder.decodeDouble(forKey: "ax") 
+        let ax = aDecoder.decodeDouble(forKey: "ax")
         let ay = aDecoder.decodeDouble(forKey: "ay")
         let az = aDecoder.decodeDouble(forKey: "az")
         let gx = aDecoder.decodeDouble(forKey: "gx")

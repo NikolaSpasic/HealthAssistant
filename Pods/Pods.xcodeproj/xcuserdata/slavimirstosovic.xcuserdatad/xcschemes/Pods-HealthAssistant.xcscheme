@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5D1684543549B116331C5330561F8CC9"
+               BlueprintIdentifier = "A16DBA75728180A51783527ACBB9E9A6"
                BuildableName = "libPods-HealthAssistant.a"
                BlueprintName = "Pods-HealthAssistant"
                ReferencedContainer = "container:Pods.xcodeproj">

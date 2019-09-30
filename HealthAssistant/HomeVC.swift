@@ -89,15 +89,16 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UICo
             
             let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.minute, .second]
-            formatter.unitsStyle = .short
+            formatter.unitsStyle = .positional
             let formattedString = formatter.string(from: TimeInterval(Int(api.activities[indexPath.item].time)!))
             cell.activityTimeLbl.text = formattedString
+            cell.activityImage.image = UIImage(named: api.activities[indexPath.item].imageName)
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 3 - 15, height: UIScreen.main.bounds.height / 4 - 20)
+        return CGSize(width: 110, height: UIScreen.main.bounds.height / 4)
     }
     /*
     // MARK: - Navigation

@@ -12,6 +12,7 @@
 		7213C0AC23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213C0AB23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift */; };
 		726FE49122830B71006B648B /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726FE49022830B71006B648B /* SensorData.swift */; };
 		72EE9A33232EA13C00CD5AD2 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EE9A32232EA13B00CD5AD2 /* Activity.swift */; };
+		72EE9A35232FE8F300CD5AD2 /* StatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EE9A34232FE8F300CD5AD2 /* StatsVC.swift */; };
 		72FE365A228458EF005F7F86 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */; };
 		72FE365C22845ABD005F7F86 /* MeasurementOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FE365B22845ABD005F7F86 /* MeasurementOption.swift */; };
 		E4F0278444B11EA8EE0CEBFD /* libPods-HealthAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D771714BCEBAC5F5D4AD85 /* libPods-HealthAssistant.a */; };
@@ -37,6 +38,7 @@
 		7213C0AB23100BCE00E5DB52 /* ActivitiesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCollectionViewCell.swift; sourceTree = "<group>"; };
 		726FE49022830B71006B648B /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		72EE9A32232EA13B00CD5AD2 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		72EE9A34232FE8F300CD5AD2 /* StatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsVC.swift; sourceTree = "<group>"; };
 		72FE3659228458EF005F7F86 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		72FE365B22845ABD005F7F86 /* MeasurementOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementOption.swift; sourceTree = "<group>"; };
 		B83DEFD5093111404C1FB8B0 /* Pods-HealthAssistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthAssistant.release.xcconfig"; path = "Target Support Files/Pods-HealthAssistant/Pods-HealthAssistant.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				F925CFAE224A35CB009E7138 /* LogInRegisterVC.swift */,
 				F9169103224A3D1200EF1BD3 /* MeasureVC.swift */,
 				F9D9D7972254B30B0004E5E8 /* ProfileVC.swift */,
+				72EE9A34232FE8F300CD5AD2 /* StatsVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				F9B8D7CD225394E900742517 /* RegisterVC.swift in Sources */,
 				F9B8D7CA2253944D00742517 /* API.swift in Sources */,
 				F9169104224A3D1200EF1BD3 /* MeasureVC.swift in Sources */,
+				72EE9A35232FE8F300CD5AD2 /* StatsVC.swift in Sources */,
 				F9D9D79C2254F0940004E5E8 /* Spinner.swift in Sources */,
 				726FE49122830B71006B648B /* SensorData.swift in Sources */,
 			);

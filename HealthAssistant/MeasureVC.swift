@@ -12,9 +12,6 @@ import Reachability
 
 class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var gyroLbl: UILabel!
-    @IBOutlet weak var accelerLbl: UILabel!
-    @IBOutlet weak var timerLbl: UILabel!
     @IBOutlet weak var startMeasuringBttn: UIButton!
     @IBOutlet weak var optionsTableView: UITableView!
     @IBOutlet weak var backgroundColorView: UIView!
@@ -136,7 +133,6 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc func updateDataTimer() {
         timeLeft -= 1
-        timerLbl.text = "\(timeLeft) seconds until data is sent"
         if timeLeft <= 0 {
             if !gatheredSensorData.isEmpty {
 //                let isConnectedToWifi = check()
@@ -176,10 +172,6 @@ class MeasureVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                                             let accx = ((accData.acceleration.x * -9.81) * 1000).rounded() / 1000
                                             let accy = ((accData.acceleration.y * -9.81) * 1000).rounded() / 1000
                                             let accz = ((accData.acceleration.z * -9.81) * 1000).rounded() / 1000
-                                            
-                                            self.accelerLbl.text = "Acc data: \n \(accx) \n \(accy) \n \(accz)"
-                                            
-                                            self.gyroLbl.text = "Gyro data: \n \(gyrox) \n \(gyroy) \n \(gyroz)"
                                             
                                             let date = Date()
                                             let calendar = Calendar.current
