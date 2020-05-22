@@ -18,17 +18,18 @@ class StatsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var activityTime = 15
         for activity in api.activities {
             if activity.name != "Ukupno" {
                 activityNames.append(activity.name)
-                activityTimes.append(Int(activity.time)!)
+                activityTimes.append(activityTime)
+                activityTime += 5
             }
         }
         customizeChart(names: activityNames, values: activityTimes.map{ Double($0) })
     }
     
     func customizeChart(names: [String], values: [Double]) {
-        
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<names.count {
             let dataEntry = PieChartDataEntry(value: values[i], label: names[i], data: names[i] as AnyObject)

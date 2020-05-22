@@ -125,7 +125,7 @@ class API {
                     API.instance.activities.append(Activity(name: "Hodanje uz stepenice", time: "\(walkingUpstairs)", imageName: "running_icon"))
                     API.instance.activities.append(Activity(name: "Hodanje niz stepenice", time: "\(walkingDownstairs)", imageName: "running_icon"))
                     API.instance.activities.append(Activity(name: "Ukupno", time: "\(total)", imageName: "walking_icon"))
-
+                    
                     let userDefaults = UserDefaults.standard
                     let encodedData: Data = try! NSKeyedArchiver.archivedData(withRootObject: self.activities, requiringSecureCoding: false)
                     userDefaults.set(encodedData, forKey: "activities")
